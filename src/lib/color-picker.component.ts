@@ -112,6 +112,10 @@ export class ColorPickerComponent implements OnInit, AfterViewInit {
         this.isIE10 = detectIE() === 10;
     }
 
+    ngOnDestroy() {
+        this.cdr.detach();
+    }
+
     ngOnInit() {
         let alphaWidth = this.alphaSlider.nativeElement.offsetWidth;
         let hueWidth = this.hueSlider.nativeElement.offsetWidth;
