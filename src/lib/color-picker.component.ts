@@ -112,6 +112,11 @@ export class ColorPickerComponent implements OnInit, AfterViewInit {
         this.isIE10 = detectIE() === 10;
     }
 
+    ngOnDestroy() {
+        this.cdr.detach();
+        this.cdr = null;
+    }
+
     ngOnInit() {
         let alphaWidth = this.alphaSlider.nativeElement.offsetWidth;
         let hueWidth = this.hueSlider.nativeElement.offsetWidth;
@@ -256,7 +261,9 @@ export class ColorPickerComponent implements OnInit, AfterViewInit {
               document.removeEventListener('mousedown', this.listenerMouseDown);
             }
             window.removeEventListener('resize', this.listenerResize);
-            this.cdr.detectChanges();
+            if(this.cdr) {
+                this.cdr.detectChanges();
+            }
         }
     }
 
